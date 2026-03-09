@@ -4,6 +4,8 @@ import ValueEstimator1991 from "@/components/uk/ValueEstimator1991";
 import AppealLetterUK from "@/components/uk/AppealLetterUK";
 import SavingsCalculatorUK from "@/components/uk/SavingsCalculatorUK";
 import ReductionCheckerUK from "@/components/uk/ReductionCheckerUK";
+import SEO from "@/components/SEO";
+import { ukFaqSchema, ukHowToSchema, ukBreadcrumbSchema } from "@/lib/seo-schemas";
 import { Link } from "react-router-dom";
 import { ArrowRight, Building2, Search, BarChart2, Calculator, FileText, Tag, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -28,6 +30,13 @@ const UKPage = () => {
 
   return (
     <main className="bg-background min-h-screen">
+      <SEO
+        title="UK Council Tax Band Checker 2025 — Check & Appeal for Free"
+        description="Check your UK council tax band in seconds. 5 million properties are in the wrong band — average overpayment is £400/year. Free appeal letter generator. Backdated refunds to 1993."
+        canonical="/uk"
+        jsonLd={[ukBreadcrumbSchema, ukHowToSchema, ukFaqSchema]}
+      />
+
       {/* Page header — clean light */}
       <div className="border-b border-border bg-background pt-10 pb-8">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl">

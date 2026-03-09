@@ -2,6 +2,8 @@ import { useState } from "react";
 import PropertyTaxGuideUSA from "@/components/usa/PropertyTaxGuideUSA";
 import OverpaymentEstimatorUSA from "@/components/usa/OverpaymentEstimatorUSA";
 import AppealLetterUSA from "@/components/usa/AppealLetterUSA";
+import SEO from "@/components/SEO";
+import { usaFaqSchema, usaBreadcrumbSchema } from "@/lib/seo-schemas";
 import { Link } from "react-router-dom";
 import { ArrowRight, Building2, BookOpen, BarChart2, FileText, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -24,6 +26,13 @@ const USAPage = () => {
 
   return (
     <main className="bg-background min-h-screen">
+      <SEO
+        title="USA Property Tax Appeal Guide 2025 — All 50 States | TaxBandCheck"
+        description="30–60% of US properties are over-assessed. Free state-by-state property tax appeal guide, overpayment estimator, and appeal letter generator. Save $500–$2,000/year. No lawyer needed."
+        canonical="/usa"
+        jsonLd={[usaBreadcrumbSchema, usaFaqSchema]}
+      />
+
       {/* Page header — clean light */}
       <div className="border-b border-border bg-background pt-10 pb-8">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl">
