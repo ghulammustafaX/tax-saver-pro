@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Hero from "@/components/Hero";
 import FAQ from "@/components/FAQ";
+import SEO from "@/components/SEO";
+import { organizationSchema, webSiteSchema, fullFaqSchema } from "@/lib/seo-schemas";
 import { PoundSterling, DollarSign, FileText, Calculator, CheckCircle, ArrowRight } from "lucide-react";
 
 const FEATURES_UK = [
@@ -60,6 +62,13 @@ const HOW_IT_WORKS = [
 const Index = () => {
   return (
     <>
+      <SEO
+        title="Free Council Tax Band Checker & Property Tax Appeal Tools | TaxBandCheck"
+        description="Check if your UK council tax band is wrong and appeal for free. USA property tax appeal tools for all 50 states. Free appeal letter generator. Average saving £400/year."
+        canonical="/"
+        jsonLd={[organizationSchema, webSiteSchema, fullFaqSchema]}
+      />
+
       <Hero />
 
       {/* Divider */}

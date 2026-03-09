@@ -1,10 +1,19 @@
 import FAQ from "@/components/FAQ";
+import SEO from "@/components/SEO";
+import { fullFaqSchema, faqBreadcrumbSchema } from "@/lib/seo-schemas";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle } from "lucide-react";
 
 const FAQPage = () => {
   return (
     <main className="bg-background min-h-screen">
+      <SEO
+        title="Council Tax & Property Tax FAQ — Everything You Need to Know"
+        description="Answers to the most common questions about UK council tax bands, how to appeal, backdated refunds, USA property tax over-assessment, and appeal deadlines for all 50 states."
+        canonical="/faq"
+        jsonLd={[faqBreadcrumbSchema, fullFaqSchema]}
+      />
+
       {/* Page header */}
       <div className="border-b border-border pt-10 pb-8">
         <div className="container mx-auto px-4 md:px-6 max-w-3xl">
