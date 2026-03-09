@@ -5,15 +5,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { UK_BANDS } from "./CouncilTaxChecker";
-import { FileText, Copy, Printer, CheckCircle } from "lucide-react";
+import { Copy, Printer, CheckCircle, ExternalLink } from "lucide-react";
 
 const generateLetter = (
-  name: string,
-  address: string,
-  currentBand: string,
-  requestedBand: string,
-  evidence: string,
-  date: string
+  name: string, address: string, currentBand: string,
+  requestedBand: string, evidence: string, date: string
 ) => `${name}
 ${address}
 
@@ -57,8 +53,8 @@ Yours faithfully,
 ${name}
 
 ---
-Note: Send this letter to your local VOA office. Find the address at: https://www.gov.uk/contact-voa
-Keep a copy for your records and send by recorded post.
+Send to your local VOA office: https://www.gov.uk/contact-voa
+Keep a copy and send by recorded delivery.
 `;
 
 const AppealLetterUK = () => {
@@ -71,7 +67,11 @@ const AppealLetterUK = () => {
   const [generated, setGenerated] = useState(false);
 
   const today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-  const letter = generateLetter(name, address, currentBand, requestedBand, evidence || "My 1991 estimated property value (using regional house price index data) suggests my property should be in a lower band. Comparable properties on my street are also in a lower band.", today);
+  const letter = generateLetter(
+    name, address, currentBand, requestedBand,
+    evidence || "My 1991 estimated property value (using regional house price index data) suggests my property should be in a lower band. Comparable properties on my street are also in a lower band.",
+    today
+  );
 
   const isValid = name.trim() && address.trim() && currentBand && requestedBand;
 
@@ -91,110 +91,113 @@ const AppealLetterUK = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="bg-card rounded-xl border border-border shadow-card p-6">
-        <div className="flex items-center gap-2 mb-1">
-          <FileText className="h-5 w-5 text-primary" />
-          <h3 className="font-display font-bold text-lg text-foreground">Council Tax Appeal Letter Generator</h3>
-        </div>
-        <p className="text-muted-foreground text-sm mb-5">
-          Fill in the fields below to generate a formal appeal letter to the Valuation Office Agency (VOA). Uses correct legal language.
+    <div className="space-y-5">
+      {/* Header */}
+      <div>
+        <h3 className="font-semibold text-foreground mb-1">Council Tax Appeal Letter Generator</h3>
+        <p className="text-sm text-muted-foreground">
+          Fill in the fields below to generate a formal appeal letter to the VOA with correct legal language.
         </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <Label htmlFor="name" className="font-medium mb-1 block">Your Full Name</Label>
-            <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Jane Smith" />
-          </div>
-
-          <div>
-            <Label htmlFor="address" className="font-medium mb-1 block">Property Address</Label>
-            <Input id="address" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="e.g. 12 Oak Street, Bristol, BS1 2AB" />
-          </div>
-
-          <div>
-            <Label className="font-medium mb-1 block">Current Council Tax Band</Label>
-            <Select value={currentBand} onValueChange={setCurrentBand}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select current band..." />
-              </SelectTrigger>
-              <SelectContent>
-                {UK_BANDS.map((b) => (
-                  <SelectItem key={b.band} value={b.band}>Band {b.band} — {b.label}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label className="font-medium mb-1 block">Requested Band (what you believe it should be)</Label>
-            <Select value={requestedBand} onValueChange={setRequestedBand}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select requested band..." />
-              </SelectTrigger>
-              <SelectContent>
-                {UK_BANDS.map((b) => (
-                  <SelectItem key={b.band} value={b.band}>Band {b.band} — {b.label}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+      {/* Form */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-1.5">
+          <Label className="text-sm font-medium">Your full name</Label>
+          <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Jane Smith" />
         </div>
-
-        <div className="mb-5">
-          <Label htmlFor="evidence" className="font-medium mb-1 block">
-            Your Evidence (optional — will use default if blank)
+        <div className="space-y-1.5">
+          <Label className="text-sm font-medium">Property address</Label>
+          <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="e.g. 12 Oak Street, Bristol, BS1 2AB" />
+        </div>
+        <div className="space-y-1.5">
+          <Label className="text-sm font-medium">Current council tax band</Label>
+          <Select value={currentBand} onValueChange={setCurrentBand}>
+            <SelectTrigger><SelectValue placeholder="Select current band…" /></SelectTrigger>
+            <SelectContent>
+              {UK_BANDS.map((b) => (
+                <SelectItem key={b.band} value={b.band}>Band {b.band} — {b.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="space-y-1.5">
+          <Label className="text-sm font-medium">Requested band (what it should be)</Label>
+          <Select value={requestedBand} onValueChange={setRequestedBand}>
+            <SelectTrigger><SelectValue placeholder="Select requested band…" /></SelectTrigger>
+            <SelectContent>
+              {UK_BANDS.map((b) => (
+                <SelectItem key={b.band} value={b.band}>Band {b.band} — {b.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="space-y-1.5 md:col-span-2">
+          <Label className="text-sm font-medium">
+            Your evidence <span className="text-muted-foreground font-normal">(optional — default text used if blank)</span>
           </Label>
           <Textarea
-            id="evidence"
             rows={3}
             value={evidence}
             onChange={(e) => setEvidence(e.target.value)}
-            placeholder="e.g. My neighbour at No. 14 (identical property) is in Band C. My estimated 1991 value of £55,000 falls in Band B range..."
+            placeholder="e.g. My neighbour at No. 14 (identical property) is in Band C. My estimated 1991 value of £55,000 falls in Band B range…"
           />
         </div>
-
-        <Button
-          onClick={() => setGenerated(true)}
-          disabled={!isValid}
-          className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-8"
-        >
-          Generate Appeal Letter
-        </Button>
       </div>
 
+      <Button
+        onClick={() => setGenerated(true)}
+        disabled={!isValid}
+        className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-8"
+      >
+        Generate Appeal Letter
+      </Button>
+
+      {/* Output */}
       {generated && isValid && (
-        <div className="animate-fade-up space-y-3">
-          <div className="bg-card rounded-xl border border-border shadow-card p-6">
-            <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
-              <h4 className="font-display font-bold text-foreground flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-saving" />
-                Your Appeal Letter
-              </h4>
+        <div className="space-y-4 animate-fade-in pt-2 border-t border-border">
+          {/* Letter preview */}
+          <div>
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-saving" />
+                <span className="font-semibold text-foreground text-sm">Your Appeal Letter</span>
+              </div>
               <div className="flex gap-2">
-                <Button size="sm" variant="outline" onClick={copyToClipboard} className="gap-1.5">
-                  {copied ? <CheckCircle className="h-4 w-4 text-saving" /> : <Copy className="h-4 w-4" />}
-                  {copied ? "Copied!" : "Copy"}
+                <Button size="sm" variant="outline" onClick={copyToClipboard} className="gap-1.5 h-8 text-xs">
+                  {copied ? <CheckCircle className="h-3.5 w-3.5 text-saving" /> : <Copy className="h-3.5 w-3.5" />}
+                  {copied ? "Copied!" : "Copy text"}
                 </Button>
-                <Button size="sm" variant="outline" onClick={printLetter} className="gap-1.5">
-                  <Printer className="h-4 w-4" /> Print / Save as PDF
+                <Button size="sm" variant="outline" onClick={printLetter} className="gap-1.5 h-8 text-xs">
+                  <Printer className="h-3.5 w-3.5" /> Print / PDF
                 </Button>
               </div>
             </div>
-            <pre className="bg-secondary rounded-lg p-5 text-sm font-mono whitespace-pre-wrap leading-relaxed border border-border text-foreground overflow-x-auto">
+            <pre className="bg-secondary rounded-xl p-5 text-xs font-mono whitespace-pre-wrap leading-relaxed border border-border text-foreground overflow-x-auto max-h-80 overflow-y-auto">
               {letter}
             </pre>
           </div>
 
-          <div className="bg-primary-subtle rounded-xl border border-primary/20 p-5 text-sm">
-            <h5 className="font-bold text-primary mb-2">📮 How to Send Your Appeal</h5>
-            <ol className="space-y-1.5 text-foreground list-decimal list-inside">
-              <li>Find your local VOA office address at <a href="https://www.gov.uk/contact-voa" target="_blank" rel="noopener noreferrer" className="text-primary underline">www.gov.uk/contact-voa</a></li>
-              <li>Print and sign the letter, keeping a copy for your records</li>
-              <li>Send by <strong>recorded delivery</strong> (proof of postage is important)</li>
-              <li>You can also submit online at <a href="https://www.gov.uk/challenge-council-tax-band" target="_blank" rel="noopener noreferrer" className="text-primary underline">www.gov.uk/challenge-council-tax-band</a></li>
-              <li>The VOA will acknowledge within 2 weeks and decide within 6 months</li>
-              <li>If unsuccessful, you can appeal to the independent Valuation Tribunal — still free</li>
+          {/* Sending instructions */}
+          <div className="bg-primary-subtle border border-primary/15 rounded-xl p-4">
+            <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-3">How to send your appeal</p>
+            <ol className="space-y-2 text-xs text-foreground list-decimal list-inside">
+              <li>Find your local VOA address at{" "}
+                <a href="https://www.gov.uk/contact-voa" target="_blank" rel="noopener noreferrer"
+                  className="text-primary underline inline-flex items-center gap-0.5">
+                  www.gov.uk/contact-voa <ExternalLink className="h-2.5 w-2.5" />
+                </a>
+              </li>
+              <li>Print and sign the letter — keep a copy for your records</li>
+              <li>Send by <strong>recorded delivery</strong> (proof of postage matters)</li>
+              <li>Or submit online at{" "}
+                <a href="https://www.gov.uk/challenge-council-tax-band" target="_blank" rel="noopener noreferrer"
+                  className="text-primary underline inline-flex items-center gap-0.5">
+                  www.gov.uk/challenge-council-tax-band <ExternalLink className="h-2.5 w-2.5" />
+                </a>
+              </li>
+              <li>VOA will acknowledge within 2 weeks and decide within 6 months</li>
+              <li>If unsuccessful, appeal to the independent Valuation Tribunal — still free</li>
             </ol>
           </div>
         </div>
