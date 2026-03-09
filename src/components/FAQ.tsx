@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const ukFAQs = [
   {
@@ -55,65 +56,78 @@ const usaFAQs = [
   }
 ];
 
-const FAQItem = ({ q, a }: { q: string; a: string }) => {
+const FAQItem = ({ q, a, index }: { q: string; a: string; index: number }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-border rounded-lg overflow-hidden">
+    <div className={cn(
+      "border-b border-border last:border-b-0 transition-colors",
+      open ? "bg-primary-subtle/60" : "hover:bg-secondary/50"
+    )}>
       <button
-        className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-muted transition-colors"
+        className="w-full text-left px-0 py-4 flex items-start justify-between gap-4 group"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
-        <span className="font-semibold text-foreground">{q}</span>
-        {open ? (
-          <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
-        ) : (
-          <ChevronDown className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-        )}
+        <div className="flex items-start gap-3 min-w-0">
+          <span className="text-xs font-bold text-muted-foreground/50 mt-0.5 w-5 flex-shrink-0 font-mono">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className={cn(
+            "font-semibold text-sm leading-snug transition-colors",
+            open ? "text-primary" : "text-foreground group-hover:text-primary"
+          )}>
+            {q}
+          </span>
+        </div>
+        <ChevronDown className={cn(
+          "h-4 w-4 flex-shrink-0 mt-0.5 transition-all duration-200 text-muted-foreground",
+          open && "rotate-180 text-primary"
+        )} />
       </button>
       {open && (
-        <div className="px-5 pb-4 pt-1 text-muted-foreground border-t border-border bg-card">
-          <p className="leading-relaxed">{a}</p>
+        <div className="pb-4 pl-8 pr-2 animate-fade-in">
+          <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
         </div>
       )}
     </div>
   );
 };
 
+const FAQGroup = ({ flag, label, faqs }: { flag: string; label: string; faqs: typeof ukFAQs }) => (
+  <div>
+    <div className="flex items-center gap-2.5 mb-4">
+      <span className="text-xl">{flag}</span>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{label}</p>
+      </div>
+    </div>
+    <div className="rounded-2xl border border-border overflow-hidden divide-y divide-border px-5">
+      {faqs.map((faq, i) => (
+        <FAQItem key={i} q={faq.q} a={faq.a} index={i} />
+      ))}
+    </div>
+  </div>
+);
+
 const FAQ = () => {
   return (
     <section id="faq" className="py-16 bg-background">
-      <div className="container mx-auto px-4 max-w-3xl">
-        <div className="text-center mb-10">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2">
+      <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">FAQ</p>
+          <h2 className="font-display text-2xl md:text-3xl font-black text-foreground mb-3">
             Frequently Asked Questions
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm max-w-md mx-auto">
             Everything you need to know about council tax bands and property tax appeals
           </p>
         </div>
 
-        <div className="mb-10">
-          <h3 className="flex items-center gap-2 font-display font-bold text-lg text-primary mb-4">
-            <span>🇬🇧</span> UK Council Tax Questions
-          </h3>
-          <div className="flex flex-col gap-2">
-            {ukFAQs.map((faq, i) => (
-              <FAQItem key={i} q={faq.q} a={faq.a} />
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="flex items-center gap-2 font-display font-bold text-lg text-primary mb-4">
-            <span>🇺🇸</span> USA Property Tax Questions
-          </h3>
-          <div className="flex flex-col gap-2">
-            {usaFAQs.map((faq, i) => (
-              <FAQItem key={i} q={faq.q} a={faq.a} />
-            ))}
-          </div>
+        <div className="space-y-10">
+          <FAQGroup flag="🇬🇧" label="UK Council Tax Questions" faqs={ukFAQs} />
+          <FAQGroup flag="🇺🇸" label="USA Property Tax Questions" faqs={usaFAQs} />
         </div>
       </div>
     </section>
