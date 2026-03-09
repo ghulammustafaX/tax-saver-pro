@@ -82,14 +82,14 @@ const UKPage = () => {
           {(() => { const t = TABS.find(t => t.id === active)!; const Icon = t.icon; return <><Icon className="h-4 w-4 text-primary" /><span>{t.desc}</span></>; })()}
         </div>
 
-        {/* Tool content panel */}
+        {/* Tool content panel — keep all mounted to preserve form state across tabs */}
         <div className="bg-background rounded-2xl border border-border shadow-card overflow-hidden">
           <div className="p-6 md:p-8">
-            {active === "checker"   && <CouncilTaxChecker />}
-            {active === "estimator" && <ValueEstimator1991 />}
-            {active === "savings"   && <SavingsCalculatorUK />}
-            {active === "letter"    && <AppealLetterUK />}
-            {active === "discounts" && <ReductionCheckerUK />}
+            <div className={active === "checker"   ? "" : "hidden"}><CouncilTaxChecker /></div>
+            <div className={active === "estimator" ? "" : "hidden"}><ValueEstimator1991 /></div>
+            <div className={active === "savings"   ? "" : "hidden"}><SavingsCalculatorUK /></div>
+            <div className={active === "letter"    ? "" : "hidden"}><AppealLetterUK /></div>
+            <div className={active === "discounts" ? "" : "hidden"}><ReductionCheckerUK /></div>
           </div>
         </div>
 
