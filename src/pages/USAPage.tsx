@@ -1,89 +1,113 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
 import PropertyTaxGuideUSA from "@/components/usa/PropertyTaxGuideUSA";
 import OverpaymentEstimatorUSA from "@/components/usa/OverpaymentEstimatorUSA";
 import AppealLetterUSA from "@/components/usa/AppealLetterUSA";
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2 } from "lucide-react";
+import { ArrowRight, Building2, BookOpen, BarChart2, FileText, CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const TABS = [
+  { id: "guide",     label: "State Appeal Guide",      icon: BookOpen,   desc: "Step-by-step instructions for all 50 states" },
+  { id: "estimator", label: "Overpayment Estimator",   icon: BarChart2,  desc: "Compare your rate to your state average" },
+  { id: "letter",    label: "Appeal Letter",           icon: FileText,   desc: "Generate a state-specific formal appeal letter" },
+];
+
+const TRUST_TAGS = [
+  "All 50 states covered",
+  "Free appeal letter generator",
+  "Based on state assessment records",
+  "No lawyer required",
+];
 
 const USAPage = () => {
+  const [active, setActive] = useState("guide");
+
   return (
-    <main>
-      {/* Page header */}
-      <div className="bg-primary text-primary-foreground py-10 border-b border-primary-foreground/10">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-3xl">🇺🇸</span>
+    <main className="bg-background min-h-screen">
+      {/* Page header — clean light */}
+      <div className="border-b border-border bg-background pt-10 pb-8">
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <div className="flex items-start gap-4 mb-4">
+            <span className="text-4xl leading-none mt-1">🇺🇸</span>
             <div>
-              <h1 className="font-display text-2xl md:text-3xl font-bold">Property Tax Appeal Guide 2025</h1>
-              <p className="text-primary-foreground/70 text-sm">Lower Your Property Tax Bill — State-by-State Guide</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">United States</p>
+              <h1 className="font-display text-3xl md:text-4xl font-black text-foreground leading-tight">
+                Property Tax Appeal Guide <span className="text-primary">2025</span>
+              </h1>
+              <p className="text-muted-foreground text-sm md:text-base mt-2 max-w-xl leading-relaxed">
+                30–60% of US properties are over-assessed. Successful appeals save homeowners an average of <strong className="text-foreground">$500–$2,000/year</strong>. Free tools for all 50 states.
+              </p>
             </div>
           </div>
-          <p className="text-primary-foreground/80 text-sm max-w-2xl">
-            30–60% of US properties are over-assessed. Successful appeals save homeowners an average of $500–$2,000 per year. Our free tools guide you through every step, for all 50 states.
-          </p>
 
-          <div className="flex flex-wrap gap-3 mt-4">
-            {["All 50 states covered", "Free appeal letter generator", "Based on state assessment records", "No lawyer required"].map((tag) => (
-              <span key={tag} className="bg-primary-foreground/10 text-primary-foreground text-xs font-medium px-3 py-1 rounded-full border border-primary-foreground/20">
-                ✓ {tag}
+          <div className="flex flex-wrap gap-2 mt-5">
+            {TRUST_TAGS.map((tag) => (
+              <span key={tag} className="inline-flex items-center gap-1.5 bg-secondary border border-border text-muted-foreground text-xs font-medium px-3 py-1.5 rounded-full">
+                <CheckCircle className="h-3 w-3 text-saving" />
+                {tag}
               </span>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Tabs defaultValue="guide" className="w-full">
-          <div className="overflow-x-auto -mx-4 px-4 mb-6">
-            <TabsList className="bg-secondary border border-border h-auto p-1 flex gap-1 w-max min-w-full md:min-w-0">
-              <TabsTrigger value="guide" className="text-xs md:text-sm font-medium whitespace-nowrap data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-3 py-2">
-                📋 State Appeal Guide
-              </TabsTrigger>
-              <TabsTrigger value="estimator" className="text-xs md:text-sm font-medium whitespace-nowrap data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-3 py-2">
-                📊 Overpayment Estimator
-              </TabsTrigger>
-              <TabsTrigger value="letter" className="text-xs md:text-sm font-medium whitespace-nowrap data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-3 py-2">
-                📝 Appeal Letter
-              </TabsTrigger>
-            </TabsList>
-          </div>
+      <div className="container mx-auto px-4 md:px-6 py-8 max-w-5xl">
+        {/* Horizontal tab cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+          {TABS.map(({ id, label, icon: Icon, desc }) => (
+            <button
+              key={id}
+              onClick={() => setActive(id)}
+              className={cn(
+                "group text-left rounded-xl border p-4 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                active === id
+                  ? "bg-primary border-primary text-primary-foreground shadow-primary"
+                  : "bg-background border-border hover:border-primary/40 hover:bg-primary-subtle"
+              )}
+            >
+              <Icon className={cn("h-4 w-4 mb-2.5", active === id ? "text-primary-foreground" : "text-primary")} />
+              <div className={cn("text-sm font-semibold mb-1", active === id ? "text-primary-foreground" : "text-foreground")}>
+                {label}
+              </div>
+              <div className={cn("text-xs leading-relaxed", active === id ? "text-primary-foreground/70" : "text-muted-foreground")}>
+                {desc}
+              </div>
+            </button>
+          ))}
+        </div>
 
-          <TabsContent value="guide">
-            <PropertyTaxGuideUSA />
-          </TabsContent>
-          <TabsContent value="estimator">
-            <OverpaymentEstimatorUSA />
-          </TabsContent>
-          <TabsContent value="letter">
-            <AppealLetterUSA />
-          </TabsContent>
-        </Tabs>
+        {/* Tool content panel */}
+        <div className="bg-background rounded-2xl border border-border shadow-card overflow-hidden">
+          <div className="p-6 md:p-8">
+            {active === "guide"     && <PropertyTaxGuideUSA />}
+            {active === "estimator" && <OverpaymentEstimatorUSA />}
+            {active === "letter"    && <AppealLetterUSA />}
+          </div>
+        </div>
 
         {/* Professional services CTA */}
-        <div className="mt-10 bg-card rounded-xl border border-border shadow-card p-6">
-          <div className="flex items-start gap-4">
-            <div className="bg-accent-light rounded-lg p-3 flex-shrink-0">
-              <Building2 className="h-6 w-6 text-accent" />
-            </div>
-            <div>
-              <h3 className="font-display font-bold text-foreground mb-1">Professional Appeal Services</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                Many property tax appeal firms work on contingency — they only charge if they save you money (typically 25–40% of your first year's savings). For high-value properties or complex cases, this is often worth it.
-              </p>
-              <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                <span className="bg-secondary px-2 py-1 rounded">No upfront cost</span>
-                <span className="bg-secondary px-2 py-1 rounded">Licensed professionals</span>
-                <span className="bg-secondary px-2 py-1 rounded">Higher success rates</span>
-              </div>
+        <div className="mt-6 bg-secondary/60 rounded-2xl border border-border p-5 flex items-start gap-4">
+          <div className="bg-background border border-border rounded-xl p-2.5 flex-shrink-0">
+            <Building2 className="h-5 w-5 text-primary" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-semibold text-sm text-foreground mb-1">Professional Appeal Services</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+              Many property tax appeal firms work on contingency — they only charge if they save you money (typically 25–40% of your first year's savings).
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {["No upfront cost", "Licensed professionals", "Higher success rates"].map(t => (
+                <span key={t} className="bg-background border border-border text-muted-foreground text-xs px-2.5 py-1 rounded-full">{t}</span>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Cross-link to UK */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground mb-2">Also paying UK council tax?</p>
+        {/* Cross-link */}
+        <div className="mt-6 pt-6 border-t border-border flex items-center justify-between">
+          <p className="text-sm text-muted-foreground">Also paying UK council tax?</p>
           <Link to="/uk" className="inline-flex items-center gap-1.5 text-primary font-medium text-sm hover:underline">
-            Check UK Council Tax Band Checker <ArrowRight className="h-4 w-4" />
+            UK Council Tax Band Checker <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>
