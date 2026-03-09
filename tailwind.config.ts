@@ -72,7 +72,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ["Merriweather", "Georgia", "serif"],
+        display: ["Playfair Display", "Georgia", "serif"],
         body: ["Inter", "system-ui", "sans-serif"],
       },
       borderRadius: {
