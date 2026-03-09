@@ -76,12 +76,12 @@ const USAPage = () => {
           ))}
         </div>
 
-        {/* Tool content panel */}
+        {/* Tool content panel — keep all mounted to preserve form state across tabs */}
         <div className="bg-background rounded-2xl border border-border shadow-card overflow-hidden">
           <div className="p-6 md:p-8">
-            {active === "guide"     && <PropertyTaxGuideUSA />}
-            {active === "estimator" && <OverpaymentEstimatorUSA />}
-            {active === "letter"    && <AppealLetterUSA />}
+            <div className={active === "guide"     ? "" : "hidden"}><PropertyTaxGuideUSA /></div>
+            <div className={active === "estimator" ? "" : "hidden"}><OverpaymentEstimatorUSA /></div>
+            <div className={active === "letter"    ? "" : "hidden"}><AppealLetterUSA /></div>
           </div>
         </div>
 
