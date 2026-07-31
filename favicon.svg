@@ -1,0 +1,17 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#192c58"/>
+  
+  <!-- Three lines icon (matching header logo) -->
+  <g transform="translate(8, 10)">
+    <!-- Top line -->
+    <rect x="0" y="0" width="16" height="3" rx="1.5" fill="white"/>
+    
+    <!-- Middle line (two bars) -->
+    <rect x="0" y="5.5" width="7" height="3" rx="1.5" fill="#E74C4C"/>
+    <rect x="9" y="5.5" width="7" height="3" rx="1.5" fill="#E74C4C"/>
+    
+    <!-- Bottom line -->
+    <rect x="0" y="11" width="16" height="3" rx="1.5" fill="white"/>
+  </g>
+</svg>
