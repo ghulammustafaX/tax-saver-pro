@@ -1,101 +1,111 @@
+/* Design System — Based on provided image
+   Primary: #192c58 (Deep Navy Blue)
+   Accent: Teal/Green from "Live Check" badge
+   Savings: Rich emerald green from refund card
+   Text: Muted grays, semibold headers
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Design System — Clean Minimal
-   Palette: Slate/Near-black, Crisp White, Royal Blue accent, Emerald savings
-   All colors MUST be HSL.
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;800;900&display=swap');
-
 @layer base {
   :root {
-    /* Core backgrounds — pure white */
-    --background: 0 0% 100%;
-    --foreground: 220 25% 10%;
+    /* Background — Light Warm Gray from image */
+    --background: 0 0% 98%; /* #FAFAFA Very light warm gray */
+    --foreground: 220 15% 25%; /* #3A3F47 Dark charcoal for body text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    /* Container/Card Background — Pure White with subtle shadow */
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 220 15% 25%; /* #3A3F47 */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover-foreground: 220 15% 25%;
 
-    /* Deep Slate Blue — primary brand */
-    --primary: 222 56% 22%;
+    /* Primary Brand Color — #192c58 (Deep Navy Blue) */
+    --primary: 222 56% 22%; /* #192c58 */
     --primary-foreground: 0 0% 100%;
-    --primary-light: 222 56% 38%;
-    --primary-subtle: 222 60% 97%;
+    --primary-light: 222 56% 35%; /* Lighter tint for hover states */
+    --primary-subtle: 222 60% 97%; /* #E8F2FF Light tint background */
 
-    /* Gold/Amber — accent */
-    --accent: 36 92% 50%;
+    /* Teal/Live Accent from image */
+    --accent: 172 45% 45%; /* #2D9B8E Teal green from "Live Check" */
     --accent-foreground: 0 0% 100%;
-    --accent-light: 36 92% 96%;
+    --accent-light: 172 45% 95%; /* Light teal background */
 
-    /* Emerald — savings highlight */
-    --saving: 158 60% 32%;
-    --saving-light: 158 55% 95%;
+    /* Rich Emerald Green from refund card */
+    --saving: 158 48% 38%; /* #2E8B68 Rich emerald from image */
+    --saving-light: 158 48% 95%; /* #E8F5F0 Light mint green */
     --saving-foreground: 0 0% 100%;
 
-    /* Neutrals */
-    --secondary: 220 15% 96%;
-    --secondary-foreground: 220 25% 20%;
+    /* Muted text colors from image */
+    --secondary: 0 0% 97%; /* #F7F7F7 Very light gray */
+    --secondary-foreground: 220 10% 45%; /* #687078 Medium gray */
 
-    --muted: 220 15% 96%;
-    --muted-foreground: 220 12% 48%;
+    --muted: 0 0% 97%; /* #F7F7F7 */
+    --muted-foreground: 220 10% 52%; /* #7A8189 Muted gray from image labels */
 
-    --destructive: 0 84% 60%;
+    /* Destructive red from image strikethrough */
+    --destructive: 355 78% 56%; /* #E74C4C Softer red from image */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 222 56% 22%;
+    /* Warning/Alert */
+    --warning: 31 100% 50%; /* #FF9500 */
+    --warning-light: 31 100% 95%; /* #FFF4E5 */
+    --warning-foreground: 0 0% 100%;
 
-    --radius: 0.625rem;
+    /* Borders & Inputs — Softer from image */
+    --border: 220 8% 85%; /* #D1D3D6 Softer dark gray border */
+    --input: 0 0% 97%; /* #F7F7F7 */
+    --ring: 222 56% 22%; /* Primary color for focus rings */
 
-    /* Sidebar (unused but needed for shadcn) */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 1rem; /* 16px - Larger rounded corners from image */
 
-    /* Typography */
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-body: 'Inter', system-ui, sans-serif;
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 15% 25%;
+    --sidebar-primary: 222 56% 22%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 97%;
+    --sidebar-accent-foreground: 220 15% 25%;
+    --sidebar-border: 220 10% 92%;
+    --sidebar-ring: 222 56% 22%;
+
+    /* Typography — Matching image style */
+    --font-display: "Playfair Display", Georgia, serif; /* For large numbers/prices */
+    --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Inter, sans-serif;
   }
 
   .dark {
-    --background: 222 40% 8%;
-    --foreground: 210 40% 95%;
-    --card: 222 35% 11%;
-    --card-foreground: 210 40% 95%;
-    --popover: 222 35% 11%;
-    --popover-foreground: 210 40% 95%;
-    --primary: 221 72% 55%;
+    --background: 220 20% 8%;
+    --foreground: 0 0% 95%;
+    --card: 220 20% 11%;
+    --card-foreground: 0 0% 95%;
+    --popover: 220 20% 11%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 222 70% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 210 40% 95%;
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 38 90% 55%;
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 172 45% 55%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 32% 17%;
-    --input: 217 32% 17%;
-    --ring: 221 72% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --destructive: 355 78% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 222 70% 55%;
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 222 70% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 222 70% 55%;
   }
 }
 
@@ -109,11 +119,21 @@
     font-family: var(--font-body);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-body);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 600; /* Matching image - semibold for headers */
+  }
+
+  /* Large display numbers like prices - use Playfair Display */
+  .font-display-number {
     font-family: var(--font-display);
-    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -121,20 +141,59 @@
   .font-display { font-family: var(--font-display); }
   .font-body { font-family: var(--font-body); }
 
+  /* Rich Emerald Green from image */
   .text-saving { color: hsl(var(--saving)); }
   .bg-saving { background-color: hsl(var(--saving)); }
   .bg-saving-light { background-color: hsl(var(--saving-light)); }
   .text-saving-foreground { color: hsl(var(--saving-foreground)); }
   .border-saving { border-color: hsl(var(--saving)); }
 
+  /* Teal accent from "Live Check" badge in image */
   .text-accent-brand { color: hsl(var(--accent)); }
   .bg-accent-brand { background-color: hsl(var(--accent)); }
   .bg-accent-light { background-color: hsl(var(--accent-light)); }
 
+  /* Primary Brand Tints */
   .bg-primary-subtle { background-color: hsl(var(--primary-subtle)); }
   .text-primary-light { color: hsl(var(--primary-light)); }
 
-  .shadow-card { box-shadow: 0 1px 4px hsl(220 25% 10% / 0.06), 0 4px 16px hsl(220 25% 10% / 0.06); }
-  .shadow-saving { box-shadow: 0 4px 20px -4px hsl(158 60% 32% / 0.25); }
-  .shadow-primary { box-shadow: 0 4px 20px -4px hsl(222 56% 22% / 0.20); }
+  /* Warning/Alert */
+  .text-warning { color: hsl(var(--warning)); }
+  .bg-warning { background-color: hsl(var(--warning)); }
+  .bg-warning-light { background-color: hsl(var(--warning-light)); }
+
+  /* Soft shadow system from image */
+  .shadow-soft-xs { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02); }
+  .shadow-soft-sm { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.03); }
+  .shadow-soft-md { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 12px rgba(0, 0, 0, 0.04); }
+  .shadow-soft-lg { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06), 0 12px 24px rgba(0, 0, 0, 0.05); }
+  
+  /* Card shadow from image — very soft, subtle */
+  .shadow-card { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03); }
+  
+  /* Green card shadow from image */
+  .shadow-saving { box-shadow: 0 4px 12px rgba(46, 139, 104, 0.15), 0 8px 24px rgba(46, 139, 104, 0.1); }
+  
+  /* Primary/Navy shadow */
+  .shadow-primary { box-shadow: 0 4px 12px rgba(25, 44, 88, 0.12), 0 8px 24px rgba(25, 44, 88, 0.08); }
+  
+  /* Smooth scale for interactions */
+  .active-scale { @apply active:scale-[0.99] transition-transform duration-150; }
+  
+  /* Text styles from image */
+  .text-label-muted { 
+    @apply text-muted-foreground text-sm font-medium tracking-normal;
+  }
+  
+  .text-title-card {
+    @apply text-foreground text-base font-semibold tracking-tight;
+  }
+  
+  .text-display-price {
+    @apply font-display text-4xl md:text-5xl font-bold tracking-tight;
+  }
+  
+  .text-badge-status {
+    @apply text-xs font-semibold;
+  }
 }

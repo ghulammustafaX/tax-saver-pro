@@ -112,76 +112,111 @@ const ReductionCheckerUK = () => {
       </div>
 
       {/* Questions */}
-      <div className="space-y-2.5">
-        {discounts.map((d) => (
-          <div
-            key={d.id}
-            className={cn(
-              "rounded-xl border transition-colors",
-              answers[d.id] === "yes" ? "border-saving/40 bg-saving-light/50" :
-              answers[d.id] === "no"  ? "border-border bg-secondary/40" :
-              "border-border bg-background"
-            )}
-          >
-            <button
-              onClick={() => setExpanded(expanded === d.id ? null : d.id)}
-              className="w-full flex items-center justify-between gap-3 p-4 text-left"
+      <div className="space-y-2">
+        {discounts.map((d, index) => {
+          const isPreviousAnswered = index === 0 || answers[discounts[index - 1].id] !== null && answers[discounts[index - 1].id] !== undefined;
+          const isLocked = !isPreviousAnswered;
+          
+          return (
+            <div
+              key={d.id}
+              className={cn(
+                "rounded-xl border-2 transition-all shadow-md",
+                isLocked 
+                  ? "opacity-50 cursor-not-allowed bg-gray-200 border-gray-300"
+                  : "hover:shadow-lg bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb]",
+                !isLocked && answers[d.id] === "yes" ? "border-green-200 shadow-green-100" :
+                !isLocked && answers[d.id] === "no"  ? "border-red-200 shadow-red-100" :
+                !isLocked && "border-gray-300 shadow-gray-300"
+              )}
             >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className={cn(
-                  "w-2 h-2 rounded-full flex-shrink-0",
-                  answers[d.id] === "yes" ? "bg-saving" :
-                  answers[d.id] === "no"  ? "bg-muted-foreground" :
-                  "bg-border"
-                )} />
-                <div className="min-w-0">
-                  <p className="font-semibold text-sm text-foreground leading-tight">{d.title}</p>
-                  <p className="text-[10px] font-semibold text-muted-foreground">{d.amount}</p>
+              <button
+                onClick={() => !isLocked && setExpanded(expanded === d.id ? null : d.id)}
+                disabled={isLocked}
+                className="w-full flex items-center justify-between gap-3 p-3 text-left"
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="text-xs font-bold text-muted-foreground">
+                      {index + 1}
+                    </span>
+                    <div className={cn(
+                      "w-2.5 h-2.5 rounded-full flex-shrink-0 shadow-sm",
+                      isLocked ? "bg-gray-400" :
+                      answers[d.id] === "yes" ? "bg-green-500 shadow-green-300" :
+                      answers[d.id] === "no"  ? "bg-red-500 shadow-red-300" :
+                      "bg-gray-300"
+                    )} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className={cn(
+                      "font-semibold text-[13px] leading-tight",
+                      isLocked ? "text-gray-500" : "text-foreground"
+                    )}>
+                      {d.title}
+                    </p>
+                    <p className="text-[10px] font-medium text-muted-foreground">{d.amount}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                {answers[d.id] && (
-                  <span className={cn(
-                    "text-[10px] font-bold px-2 py-0.5 rounded-full",
-                    answers[d.id] === "yes" ? "bg-saving text-saving-foreground" : "bg-secondary text-muted-foreground border border-border"
-                  )}>
-                    {answers[d.id] === "yes" ? "Yes" : "No"}
-                  </span>
-                )}
-                <ChevronDown className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", expanded === d.id && "rotate-180")} />
-              </div>
-            </button>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  {isLocked && (
+                    <span className="text-[10px] font-semibold text-gray-500 bg-gray-300 px-2 py-1 rounded-full">
+                      Locked
+                    </span>
+                  )}
+                  <ChevronDown className={cn(
+                    "h-4 w-4 transition-transform",
+                    isLocked ? "text-gray-400" : "text-muted-foreground",
+                    expanded === d.id && "rotate-180"
+                  )} />
+                </div>
+              </button>
 
-            {expanded === d.id && (
-              <div className="px-4 pb-4 animate-fade-in">
-                <p className="text-sm text-muted-foreground mb-3">{d.question}</p>
-                <div className="flex gap-2">
+              {expanded === d.id && !isLocked && (
+              <div className="px-3 pb-3 animate-fade-in">
+                <p className="text-[13px] text-muted-foreground mb-3">{d.question}</p>
+                <div className="flex gap-2.5">
                   <Button
                     size="sm"
                     onClick={() => setAnswer(d.id, "yes")}
                     className={cn(
-                      "h-8 text-xs font-semibold px-5",
+                      "h-9 text-sm font-semibold px-5 border-2 shadow-sm transition-all",
                       answers[d.id] === "yes"
-                        ? "bg-saving text-saving-foreground hover:bg-saving/90"
-                        : "bg-background border border-border text-foreground hover:bg-secondary"
+                        ? "bg-green-500 text-white border-green-500 hover:bg-green-600"
+                        : "bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] border-green-200 text-foreground hover:bg-green-50 hover:border-green-300"
                     )}
-                    variant={answers[d.id] === "yes" ? "default" : "outline"}
                   >
-                    Yes
+                    <div className="flex items-center gap-1.5">
+                      <div className={cn(
+                        "w-2 h-2 rounded-full",
+                        answers[d.id] === "yes" ? "bg-white" : "bg-green-400"
+                      )} />
+                      Yes
+                    </div>
                   </Button>
                   <Button
                     size="sm"
                     onClick={() => setAnswer(d.id, "no")}
-                    variant={answers[d.id] === "no" ? "secondary" : "outline"}
-                    className="h-8 text-xs font-semibold px-5"
+                    className={cn(
+                      "h-9 text-sm font-semibold px-5 border-2 shadow-sm transition-all",
+                      answers[d.id] === "no"
+                        ? "bg-red-500 text-white border-red-500 hover:bg-red-600"
+                        : "bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] border-red-200 text-foreground hover:bg-red-50 hover:border-red-300"
+                    )}
                   >
-                    No
+                    <div className="flex items-center gap-1.5">
+                      <div className={cn(
+                        "w-2 h-2 rounded-full",
+                        answers[d.id] === "no" ? "bg-white" : "bg-red-400"
+                      )} />
+                      No
+                    </div>
                   </Button>
                 </div>
               </div>
             )}
           </div>
-        ))}
+        )})}
       </div>
 
       <Button

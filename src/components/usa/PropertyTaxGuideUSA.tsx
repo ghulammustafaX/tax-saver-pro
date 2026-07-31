@@ -53,10 +53,12 @@ const PropertyTaxGuideUSA = () => {
 
       {/* State selector + stats */}
       <div className="flex flex-col sm:flex-row sm:items-end gap-4">
-        <div className="space-y-1.5 w-full max-w-xs">
-          <Label className="text-sm font-medium">Your state</Label>
+        <div className="space-y-2 w-full max-w-xs">
+          <Label className="text-sm font-semibold text-foreground">Your state</Label>
           <Select value={selectedState} onValueChange={setSelectedState}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue />
+            </SelectTrigger>
             <SelectContent className="max-h-64">
               {TOP_STATES_GUIDE.map((s) => (
                 <SelectItem key={s.code} value={s.code}>{s.label}</SelectItem>

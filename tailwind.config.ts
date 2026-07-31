@@ -52,6 +52,11 @@ export default {
           light: "hsl(var(--saving-light))",
           foreground: "hsl(var(--saving-foreground))",
         },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          light: "hsl(var(--warning-light))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -72,13 +77,49 @@ export default {
         },
       },
       fontFamily: {
-        display: ["Playfair Display", "Georgia", "serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
+        display: [
+          "Playfair Display",
+          "Georgia",
+          "Times New Roman",
+          "serif",
+        ],
+        body: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "SF Pro Text",
+          "Helvetica Neue",
+          "Inter",
+          "sans-serif",
+        ],
+        mono: [
+          "SF Mono",
+          "Monaco",
+          "Cascadia Code",
+          "Consolas",
+          "monospace",
+        ],
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "var(--radius)", // 16px - matching image roundness
+        md: "calc(var(--radius) - 4px)", // 12px
+        sm: "calc(var(--radius) - 8px)", // 8px
+        xl: "1.25rem", // 20px for larger cards
+        "2xl": "1.5rem", // 24px for hero sections
+      },
+      fontSize: {
+        // Matching image typography
+        "display-xl": ["3.5rem", { lineHeight: "1", letterSpacing: "-0.03em", fontWeight: "700" }],
+        "display-lg": ["3rem", { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "display": ["2.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "title-lg": ["1.5rem", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "title": ["1.125rem", { lineHeight: "1.4", letterSpacing: "-0.005em", fontWeight: "600" }],
+        "body-lg": ["1rem", { lineHeight: "1.5", fontWeight: "500" }],
+        "body": ["0.875rem", { lineHeight: "1.5", fontWeight: "500" }],
+        "label": ["0.75rem", { lineHeight: "1.4", fontWeight: "600" }],
+        "caption": ["0.6875rem", { lineHeight: "1.3", fontWeight: "500" }],
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
       keyframes: {
         "accordion-down": {
@@ -97,9 +138,17 @@ export default {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
         pulse: {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
+        },
+        "slide-infinite": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(calc(-100% / 3))" },
         },
       },
       animation: {
@@ -107,7 +156,15 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.5s ease-out both",
         "fade-in": "fade-in 0.4s ease-out both",
+        "scale-in": "scale-in 0.3s ease-out both",
         pulse: "pulse 2s ease-in-out infinite",
+        "slide-infinite": "slide-infinite 30s linear infinite",
+      },
+      boxShadow: {
+        "soft-xs": "0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02)",
+        "soft-sm": "0 2px 4px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.03)",
+        "soft-md": "0 4px 8px rgba(0, 0, 0, 0.05), 0 6px 12px rgba(0, 0, 0, 0.04)",
+        "soft-lg": "0 8px 16px rgba(0, 0, 0, 0.06), 0 12px 24px rgba(0, 0, 0, 0.05)",
       },
     },
   },

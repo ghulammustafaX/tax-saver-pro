@@ -40,11 +40,11 @@ const ukFAQs = [
 const usaFAQs = [
   {
     q: "How do I know if I'm overpaying property tax?",
-    a: "Compare your property's assessed value to recent sales of similar homes (comparables or 'comps') in your area. If your home's assessed value is higher than comparable sales, you may be over-assessed. Our estimator compares your effective tax rate to your state average — a higher rate is a strong indicator of over-assessment."
+    a: "Compare your property's assessed value to recent sales of similar homes (comparables or 'comps') in your area. If your home's assessed value is higher than comparable sales, you may be over-assessed. Our estimator compares your effective tax rate to your state average a higher rate is a strong indicator of over-assessment."
   },
   {
     q: "How do I appeal my property tax assessment?",
-    a: "First, request your property record card from your county assessor's office to check for errors (incorrect square footage, wrong number of bedrooms, etc.). Then gather comparable property data. File a formal appeal before your county's deadline — most counties have a 30–90 day window after assessment notices are mailed. Our state-by-state guide shows exact deadlines."
+    a: "First, request your property record card from your county assessor's office to check for errors (incorrect square footage, wrong number of bedrooms, etc.). Then gather comparable property data. File a formal appeal before your county's deadline most counties have a 30–90 day window after assessment notices are mailed. Our state-by-state guide shows exact deadlines."
   },
   {
     q: "How much can I save by appealing my property tax?",
@@ -52,82 +52,101 @@ const usaFAQs = [
   },
   {
     q: "Do I need a lawyer to appeal my property tax?",
-    a: "No — most homeowners can file a property tax appeal themselves for free. You'll need your property record, comparable sales data (available through your county assessor or sites like Zillow/Redfin), and a completed appeal form. Our free appeal letter generator creates a professional letter with state-specific language."
+    a: "No. most homeowners can file a property tax appeal themselves for free. You'll need your property record, comparable sales data (available through your county assessor or sites like Zillow/Redfin), and a completed appeal form. Our free appeal letter generator creates a professional letter with state-specific language."
   }
 ];
 
-const FAQItem = ({ q, a, index }: { q: string; a: string; index: number }) => {
-  const [open, setOpen] = useState(false);
-
+const FAQItem = ({ q, a, index, isOpen, onToggle }: { q: string; a: string; index: number; isOpen: boolean; onToggle: () => void }) => {
   return (
-    <div className={cn(
-      "border-b border-border last:border-b-0 transition-colors",
-      open ? "bg-primary-subtle/60" : "hover:bg-secondary/50"
-    )}>
+    <div className="border-b border-border/50 last:border-b-0">
       <button
-        className="w-full text-left px-0 py-4 flex items-start justify-between gap-4 group"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
+        className="w-full text-left py-5 flex items-start justify-between gap-6 group"
+        onClick={onToggle}
+        aria-expanded={isOpen}
       >
-        <div className="flex items-start gap-3 min-w-0">
-          <span className="text-xs font-bold text-muted-foreground/50 mt-0.5 w-5 flex-shrink-0 font-mono">
+        <div className="flex items-start gap-4 min-w-0 flex-1">
+          <span className="text-[11px] font-bold text-primary/40 mt-1 w-6 flex-shrink-0 font-mono">
             {String(index + 1).padStart(2, "0")}
           </span>
           <span className={cn(
-            "font-semibold text-sm leading-snug transition-colors",
-            open ? "text-primary" : "text-foreground group-hover:text-primary"
+            "font-semibold text-[15px] leading-snug transition-colors",
+            isOpen ? "text-primary" : "text-foreground"
           )}>
             {q}
           </span>
         </div>
         <ChevronDown className={cn(
-          "h-4 w-4 flex-shrink-0 mt-0.5 transition-all duration-200 text-muted-foreground",
-          open && "rotate-180 text-primary"
+          "h-5 w-5 flex-shrink-0 mt-1 transition-all duration-300 text-muted-foreground",
+          isOpen && "rotate-180 text-primary"
         )} />
       </button>
-      {open && (
-        <div className="pb-4 pl-8 pr-2 animate-fade-in">
-          <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
+      {isOpen && (
+        <div className="pb-5 pl-10 pr-2 animate-fade-in">
+          <div className="bg-gray-100 rounded-2xl px-5 py-4 border border-gray-200">
+            <p className="text-[13px] text-muted-foreground leading-relaxed">{a}</p>
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-const FAQGroup = ({ flag, label, faqs }: { flag: string; label: string; faqs: typeof ukFAQs }) => (
+const FAQGroup = ({ flag, label, faqs, openIndex, onToggle }: { flag: string; label: string; faqs: typeof ukFAQs; openIndex: number | null; onToggle: (index: number) => void }) => (
   <div>
-    <div className="flex items-center gap-2.5 mb-4">
-      <span className="text-xl">{flag}</span>
+    <div className="flex items-center gap-3 mb-6">
+      <div className="w-11 h-11 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full flex items-center justify-center text-xl">
+        {flag}
+      </div>
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{label}</p>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{label}</p>
       </div>
     </div>
-    <div className="rounded-2xl border border-border overflow-hidden divide-y divide-border px-5">
-      {faqs.map((faq, i) => (
-        <FAQItem key={i} q={faq.q} a={faq.a} index={i} />
-      ))}
+    <div className="bg-card rounded-3xl border border-border/60 overflow-hidden shadow-soft-sm">
+      <div className="divide-y divide-border/50 px-6">
+        {faqs.map((faq, i) => (
+          <FAQItem 
+            key={i} 
+            q={faq.q} 
+            a={faq.a} 
+            index={i} 
+            isOpen={openIndex === i}
+            onToggle={() => onToggle(i)}
+          />
+        ))}
+      </div>
     </div>
   </div>
 );
 
 const FAQ = () => {
+  const [openUKIndex, setOpenUKIndex] = useState<number | null>(null);
+  const [openUSAIndex, setOpenUSAIndex] = useState<number | null>(null);
+
+  const handleUKToggle = (index: number) => {
+    setOpenUKIndex(openUKIndex === index ? null : index);
+  };
+
+  const handleUSAToggle = (index: number) => {
+    setOpenUSAIndex(openUSAIndex === index ? null : index);
+  };
+
   return (
-    <section id="faq" className="py-16 bg-background">
-      <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+    <section id="faq" className="py-20 md:py-24 bg-background">
+      <div className="container mx-auto px-4 md:px-6 max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">FAQ</p>
-          <h2 className="font-display text-2xl md:text-3xl font-black text-foreground mb-3">
+        <div className="text-center mb-16">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-primary mb-4">FAQ</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-muted-foreground text-sm max-w-md mx-auto">
+          <p className="text-muted-foreground text-[15px] max-w-2xl mx-auto leading-relaxed">
             Everything you need to know about council tax bands and property tax appeals
           </p>
         </div>
 
-        <div className="space-y-10">
-          <FAQGroup flag="🇬🇧" label="UK Council Tax Questions" faqs={ukFAQs} />
-          <FAQGroup flag="🇺🇸" label="USA Property Tax Questions" faqs={usaFAQs} />
+        <div className="space-y-12">
+          <FAQGroup flag="🇬🇧" label="UK Council Tax Questions" faqs={ukFAQs} openIndex={openUKIndex} onToggle={handleUKToggle} />
+          <FAQGroup flag="🇺🇸" label="USA Property Tax Questions" faqs={usaFAQs} openIndex={openUSAIndex} onToggle={handleUSAToggle} />
         </div>
       </div>
     </section>

@@ -153,7 +153,9 @@ Keep a signed copy for your records.
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">State</Label>
           <Select value={state} onValueChange={setState}>
-            <SelectTrigger><SelectValue placeholder="Select state…" /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue placeholder="Select state…" />
+            </SelectTrigger>
             <SelectContent className="max-h-64">
               {TOP_STATES.map((s) => (
                 <SelectItem key={s.code} value={s.code}>{s.label}</SelectItem>
@@ -163,19 +165,39 @@ Keep a signed copy for your records.
         </div>
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Your full name</Label>
-          <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. John Smith" />
+          <Input 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            placeholder="e.g. John Smith" 
+            className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] focus:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
+          />
         </div>
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Property address</Label>
-          <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="e.g. 123 Main Street, Austin, TX 78701" />
+          <Input 
+            value={address} 
+            onChange={(e) => setAddress(e.target.value)} 
+            placeholder="e.g. 123 Main Street, Austin, TX 78701" 
+            className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] focus:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
+          />
         </div>
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Current assessed value ($)</Label>
-          <Input value={assessedValue} onChange={(e) => setAssessedValue(e.target.value)} placeholder="e.g. 420,000" className="font-mono" />
+          <Input 
+            value={assessedValue} 
+            onChange={(e) => setAssessedValue(e.target.value)} 
+            placeholder="e.g. 420,000" 
+            className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] focus:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all font-mono" 
+          />
         </div>
         <div className="space-y-1.5 md:col-span-2">
           <Label className="text-sm font-medium">Requested assessed value ($)</Label>
-          <Input value={requestedValue} onChange={(e) => setRequestedValue(e.target.value)} placeholder="e.g. 350,000" className="font-mono" />
+          <Input 
+            value={requestedValue} 
+            onChange={(e) => setRequestedValue(e.target.value)} 
+            placeholder="e.g. 350,000" 
+            className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] focus:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all font-mono" 
+          />
         </div>
         <div className="space-y-1.5 md:col-span-2">
           <Label className="text-sm font-medium">
@@ -184,6 +206,7 @@ Keep a signed copy for your records.
           <Textarea
             rows={3}
             value={evidence}
+            className="text-base border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] focus:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
             onChange={(e) => setEvidence(e.target.value)}
             placeholder="e.g. 456 Elm Street sold for $340,000 in March 2024 and is assessed at $335,000. My property is of similar size and condition…"
           />

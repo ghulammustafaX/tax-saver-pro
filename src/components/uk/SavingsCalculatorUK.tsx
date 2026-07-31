@@ -80,7 +80,9 @@ const SavingsCalculatorUK = () => {
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Your current band</Label>
           <Select value={currentBand} onValueChange={setCurrentBand}>
-            <SelectTrigger><SelectValue placeholder="Select your band…" /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue placeholder="Select your band…" />
+            </SelectTrigger>
             <SelectContent>
               {UK_BANDS.map((b) => (
                 <SelectItem key={b.band} value={b.band}>Band {b.band} — {b.label}</SelectItem>
@@ -91,7 +93,9 @@ const SavingsCalculatorUK = () => {
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Council area</Label>
           <Select value={councilArea} onValueChange={setCouncilArea}>
-            <SelectTrigger><SelectValue placeholder="Select council area…" /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue placeholder="Select council area…" />
+            </SelectTrigger>
             <SelectContent>
               {Object.entries(COUNCIL_RATES).map(([key, val]) => (
                 <SelectItem key={key} value={key}>{val.label}</SelectItem>

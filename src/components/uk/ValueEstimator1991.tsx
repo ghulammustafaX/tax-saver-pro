@@ -74,6 +74,7 @@ const ValueEstimator1991 = () => {
           <Input
             placeholder="e.g. 350,000"
             value={currentValue}
+            className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] focus:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
             onChange={(e) => setCurrentValue(e.target.value)}
             className="font-mono"
           />
@@ -81,7 +82,9 @@ const ValueEstimator1991 = () => {
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Property type</Label>
           <Select value={propertyType} onValueChange={setPropertyType}>
-            <SelectTrigger><SelectValue placeholder="Select type…" /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue placeholder="Select type…" />
+            </SelectTrigger>
             <SelectContent>
               {PROPERTY_TYPES.map((t) => (
                 <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
@@ -92,7 +95,9 @@ const ValueEstimator1991 = () => {
         <div className="space-y-1.5 md:col-span-2">
           <Label className="text-sm font-medium">Region</Label>
           <Select value={region} onValueChange={setRegion}>
-            <SelectTrigger><SelectValue placeholder="Select region…" /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue placeholder="Select region…" />
+            </SelectTrigger>
             <SelectContent>
               {REGIONS.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
             </SelectContent>

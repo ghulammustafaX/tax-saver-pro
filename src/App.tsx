@@ -7,7 +7,6 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import UKPage from "./pages/UKPage";
 import USAPage from "./pages/USAPage";
-import FAQPage from "./pages/FAQPage";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 
@@ -25,7 +24,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/uk" element={<UKPage />} />
           <Route path="/usa" element={<USAPage />} />
-          <Route path="/faq" element={<FAQPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

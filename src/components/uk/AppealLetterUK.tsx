@@ -104,16 +104,28 @@ const AppealLetterUK = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Your full name</Label>
-          <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Jane Smith" />
+          <Input 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            placeholder="e.g. Jane Smith" 
+            className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] focus:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
+          />
         </div>
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Property address</Label>
-          <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="e.g. 12 Oak Street, Bristol, BS1 2AB" />
+          <Input 
+            value={address} 
+            onChange={(e) => setAddress(e.target.value)} 
+            placeholder="e.g. 12 Oak Street, Bristol, BS1 2AB" 
+            className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] focus:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
+          />
         </div>
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Current council tax band</Label>
           <Select value={currentBand} onValueChange={setCurrentBand}>
-            <SelectTrigger><SelectValue placeholder="Select current band…" /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue placeholder="Select current band…" />
+            </SelectTrigger>
             <SelectContent>
               {UK_BANDS.map((b) => (
                 <SelectItem key={b.band} value={b.band}>Band {b.band} — {b.label}</SelectItem>
@@ -124,7 +136,9 @@ const AppealLetterUK = () => {
         <div className="space-y-1.5">
           <Label className="text-sm font-medium">Requested band (what it should be)</Label>
           <Select value={requestedBand} onValueChange={setRequestedBand}>
-            <SelectTrigger><SelectValue placeholder="Select requested band…" /></SelectTrigger>
+            <SelectTrigger className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all">
+              <SelectValue placeholder="Select requested band…" />
+            </SelectTrigger>
             <SelectContent>
               {UK_BANDS.map((b) => (
                 <SelectItem key={b.band} value={b.band}>Band {b.band} — {b.label}</SelectItem>
@@ -139,6 +153,7 @@ const AppealLetterUK = () => {
           <Textarea
             rows={3}
             value={evidence}
+            className="text-base border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] focus:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
             onChange={(e) => setEvidence(e.target.value)}
             placeholder="e.g. My neighbour at No. 14 (identical property) is in Band C. My estimated 1991 value of £55,000 falls in Band B range…"
           />
