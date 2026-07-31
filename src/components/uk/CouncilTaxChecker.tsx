@@ -64,7 +64,6 @@ const CouncilTaxChecker = () => {
           <Input
             placeholder="e.g. SW1A 1AA"
             value={postcode}
-            className="h-12 text-base font-semibold border-2 border-[#192c58] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#1E3A8A] focus:border-[#1E3A8A] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
             onChange={(e) => { setPostcode(e.target.value); setSubmitted(false); setError(""); }}
             onKeyDown={(e) => e.key === "Enter" && handleCheck()}
             className="font-mono uppercase text-sm h-12 bg-input border-border rounded-xl px-4 focus:bg-card transition-colors"

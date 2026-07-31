@@ -116,7 +116,6 @@ const OverpaymentEstimatorUSA = () => {
           <Input
             value={homeValue}
             onChange={(e) => setHomeValue(e.target.value)}
-            className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] focus:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
             placeholder="e.g. 350,000"
             className="font-mono"
           />
@@ -126,7 +125,6 @@ const OverpaymentEstimatorUSA = () => {
           <Input
             value={currentBill}
             onChange={(e) => setCurrentBill(e.target.value)}
-            className="h-12 text-base font-semibold border-2 border-[#1f2937] bg-gradient-to-r from-[#f3f4f6] to-[#e5e7eb] shadow-md hover:shadow-lg hover:border-[#374151] focus:border-[#374151] hover:from-[#e5e7eb] hover:to-[#d1d5db] transition-all"
             placeholder="e.g. 5,200"
             className="font-mono"
           />
