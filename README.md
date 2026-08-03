@@ -90,6 +90,14 @@ npm run build
 npm run preview
 ```
 
+### GitHub Pages (project site)
+
+- The app is configured for project-site hosting under `/tax-saver-pro/` via `vite.config.ts` (`base: "/tax-saver-pro/"`).
+- SPA deep links are supported on GitHub Pages through `public/404.html` redirect fallback.
+- Automated deployment is configured in `/home/runner/work/tax-saver-pro/tax-saver-pro/.github/workflows/deploy.yml` and publishes the built `dist/` directory from `main`.
+- In repository settings, set **Pages** source to **GitHub Actions**.
+- You can still deploy manually with `npm run deploy` if needed.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.

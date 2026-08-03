@@ -77,8 +77,8 @@ const USAPage = () => {
                 Appeal in minutes with our state-specific guides — all 50 states covered.
               </p>
 
-              {/* All 3 stats in ONE horizontal line - compact pills */}
-              <div className="flex flex-nowrap gap-2.5 justify-center lg:justify-start overflow-x-auto pb-1 pt-2">
+              {/* All 3 stats - responsive: horizontal on desktop, vertical stack on mobile */}
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 justify-center lg:justify-start pt-2">
                 {/* Properties stat */}
                 <div className="group backdrop-blur-xl bg-white/12 hover:bg-white/18 border border-white/30 rounded-full px-4 py-2.5 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex-shrink-0">
                   <div className="flex items-center gap-2">
